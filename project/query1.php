@@ -24,7 +24,6 @@
                       Calendar_Dimension.Year in (". implode(",",$years).") AND
                       Calendar_Dimension.Quarter in (". implode(",",$quarters).")
                       GROUP BY Bike_Dimension.BikeType,Calendar_Dimension.Year,Calendar_Dimension.Quarter ";
-            echo $query;          
             $ps = $con->prepare($query);
 			$ps->setFetchMode(PDO::FETCH_ASSOC);
             // Fetch the matching row.
@@ -37,23 +36,23 @@
             $isheader = true;
                 print "<table border='2'>\n";
                 foreach ($data as $row) {
-                	print "            <tr>\n";
+                	print "<tr>\n";
                 	if ($isheader) {
-				        print "        <tr>\n";
+				        print "<tr>\n";
 				        foreach ($row as $name => $value) {
-				            print "            <th>$name</th>\n";
+				            print "<th>$name</th>\n";
 				        }
-				        print "        </tr>\n";
+				        print "</tr>\n";
 				        
 				        $doHeader = false;
 				    }
 				    $isheader = false;
 				    print "            <tr>\n";
 	                foreach ($row as $field => $value) {
-	                    print "               <td>$value</td>\n";
+	                    print "<td>$value</td>\n";
 	                }
 	                
-	                print "            </tr>\n";
+	                print "</tr>\n";
                 }
                 
                 print"</table>";
