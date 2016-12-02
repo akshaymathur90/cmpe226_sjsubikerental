@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Custome Analytics</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <style>
+  #rcorners2 {
+    border-radius: 25px;
+    border: 2px solid #73AD21;
+    padding: 20px; 
+    #width: 300px;
+    height: 350px;    
+}
+</style>
+</head>
+
+<body class="container">
+<div class="jumbotron text-center">
+  <h1>Customer Analytics</h1>
+</div>
+<div class="row">
+	<div class="col-md-6">
+ 		<form action="query-cust2.php" method="POST">
+ 			<input type="submit" value="Check number of bikes rented by all customers for all years" style="height:100px;width:500px" class="btn btn-success"/>
+ 		</form>
+ 	</div>
+	<div class="col-md-6">
+		<form action="query-cust1.php" method="POST">
+ 			<input type="submit" value="Check  all customers who made maximum bookings for all years" style="height:100px;width:500px" class="btn btn-success"/>
+ 		</form>
+ 	</div>
+ 	
+ 
+</div>
+<br>
+<div class="row">
+	<div class="col-md-6">
+ 		<form action="query4.php" method="POST">
+ 			<input type="submit" value="Check number of bikes rented for all quarters for recent year" style="height:100px;width:500px" class="btn btn-success"/>
+ 		</form>
+ 	</div>
+ 	<div class="col-md-6">
+ 		<form action="query5.php" method="POST">
+ 			<input type="submit" value="Check number of bikes rented for all months for recent year" style="height:100px;width:500px" class="btn btn-success"/>
+ 		</form>
+ 	</div>
+</div>
+<br>
