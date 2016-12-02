@@ -17,13 +17,13 @@
              
             // Connect to the database.
             $con = connectDB();
-            $query = "SELECT cal.year,c.customerID, c.Name, count(*) as NoOfBikesRented
-                            FROM Customer_dimension c,
-                                 booking_fact b,
-                                 calendar_dimension cal
-                            WHERE b.calendarkey = cal.calendarkey
-                            AND   b.customerkey = c.customerkey
-                            GROUP BY cal.year,c.customerID, c.name";
+            $query = "SELECT Bike_Dimension.BikeType,Customer_dimension.Name, COUNT(BookingID) as numberOfBikes
+                    from Booking_Fact,Calendar_Dimension,Bike_Dimension,Customer_dimension
+                    where Calendar_Dimension.Year = '2016'
+                     and Booking_Fact.CalendarKey=Calendar_Dimension.CalendarKey
+                     and Booking_Fact.BikeKey=Bike_Dimension.BikeKey 
+                     and Booking_Fact.Customerkey = Customer_dimension.CustomerKey
+                     GROUP BY Bike_Dimension.BikeType,Customer_dimension.Name ";
             $ps = $con->prepare($query);
 			$ps->setFetchMode(PDO::FETCH_ASSOC);
             // Fetch the matching row.
@@ -58,7 +58,7 @@
                 
                 print"</table></div>";
                 print "<div class=\"col-md-8\"> ";
-                print "<script type='text/javascript' src='https://10az.online.tableau.com/javascripts/api/viz_v1.js'></script><div class='tableauPlaceholder' style='width: 1284px; height: 515px;'><object class='tableauViz' width='1284' height='515' style='display:none;'><param name='host_url' value='https%3A%2F%2F10az.online.tableau.com%2F' /> <param name='site_root' value='&#47;t&#47;sjsubikerental' /><param name='name' value='NoOfBikesByYearandLocationandTypeandModel&#47;Sheet8' /><param name='tabs' value='no' /><param name='toolbar' value='yes' /><param name='showShareOptions' value='true' /></object></div>";
+                print "<script type='text/javascript' src='https://10az.online.tableau.com/javascripts/api/viz_v1.js'></script><div class='tableauPlaceholder' style='width: 1284px; height: 515px;'><object class='tableauViz' width='1284' height='515' style='display:none;'><param name='host_url' value='https%3A%2F%2F10az.online.tableau.com%2F' /> <param name='site_root' value='&#47;t&#47;sjsubikerental' /><param name='name' value='NoOfBikesByYearandLocationandType&#47;Sheet7' /><param name='tabs' value='no' /><param name='toolbar' value='yes' /><param name='showShareOptions' value='true' /></object></div>";
             }
           
         }
