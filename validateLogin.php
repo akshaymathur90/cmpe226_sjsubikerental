@@ -25,6 +25,9 @@
 
         if(count($rows) > 0){
                 print "<p>Valid User credentials</p>\n";
+                echo '<script type="text/javascript">
+           window.location = "http://www.google.com/"
+      </script>';
             }
             else{
             	print "<p>In-Valid User credentials</p>\n";
