@@ -17,13 +17,7 @@
              
             // Connect to the database.
             $con = connectDB();
-            $query = "SELECT cal.year,c.customerID, c.Name, count(*) as NoOfBikesRented
-                            FROM Customer_dimension c,
-                                 booking_fact b,
-                                 calendar_dimension cal
-                            WHERE b.calendarkey = cal.calendarkey
-                            AND   b.customerkey = c.customerkey
-                            GROUP BY cal.year,c.customerID, c.name";
+            $query = "SELECT Bike_Dimension.Location,Calendar_Dimension.Year,SUM(Booking_Fact.BillAmount) as revenue from Booking_Fact,Calendar_Dimension,Bike_Dimension where Booking_Fact.CalendarKey=Calendar_Dimension.CalendarKey and Booking_Fact.BikeKey=Bike_Dimension.BikeKey GROUP BY Calendar_Dimension.Year,Bike_Dimension.Location";
             $ps = $con->prepare($query);
 			$ps->setFetchMode(PDO::FETCH_ASSOC);
             // Fetch the matching row.
@@ -58,7 +52,7 @@
                 
                 print"</table></div>";
                 print "<div class=\"col-md-8\"> ";
-                print "<script type='text/javascript' src='https://10az.online.tableau.com/javascripts/api/viz_v1.js'></script><div class='tableauPlaceholder' style='width: 1284px; height: 513px;'><object class='tableauViz' width='1284' height='513' style='display:none;'><param name='host_url' value='https%3A%2F%2F10az.online.tableau.com%2F' /> <param name='site_root' value='&#47;t&#47;sjsubikerental' /><param name='name' value='CustomerYear&#47;Sheet1' /><param name='tabs' value='no' /><param name='toolbar' value='yes' /><param name='showShareOptions' value='true' /></object></div>";
+                print "<script type='text/javascript' src='https://10az.online.tableau.com/javascripts/api/viz_v1.js'></script><div class='tableauPlaceholder' style='width: 1284px; height: 513px;'><object class='tableauViz' width='1284' height='513' style='display:none;'><param name='host_url' value='https%3A%2F%2F10az.online.tableau.com%2F' /> <param name='site_root' value='&#47;t&#47;sjsubikerental' /><param name='name' value='revenueBikeYearsandLocation&#47;Sheet6' /><param name='tabs' value='no' /><param name='toolbar' value='yes' /><param name='showShareOptions' value='true' /></object></div>";
             }
           
         }

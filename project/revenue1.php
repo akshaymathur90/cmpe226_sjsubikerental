@@ -2,7 +2,7 @@
 <html lang="en-US">
 <head>
     <meta charset="UTF-8">
-    <title>Bookings across Bike Types</title>
+    <title>Revenue across Bike Types</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
@@ -17,13 +17,7 @@
              
             // Connect to the database.
             $con = connectDB();
-            $query = "SELECT cal.year,c.customerID, c.Name, count(*) as NoOfBikesRented
-                            FROM Customer_dimension c,
-                                 booking_fact b,
-                                 calendar_dimension cal
-                            WHERE b.calendarkey = cal.calendarkey
-                            AND   b.customerkey = c.customerkey
-                            GROUP BY cal.year,c.customerID, c.name";
+            $query = "select Bike_Dimension.BikeType,sum(Booking_Fact.BillAmount) as revenue from Booking_Fact,Bike_Dimension where Bike_Dimension.BikeKey=Booking_Fact.BikeKey group by Bike_Dimension.BikeType";
             $ps = $con->prepare($query);
 			$ps->setFetchMode(PDO::FETCH_ASSOC);
             // Fetch the matching row.
@@ -58,7 +52,8 @@
                 
                 print"</table></div>";
                 print "<div class=\"col-md-8\"> ";
-                print "<script type='text/javascript' src='https://10az.online.tableau.com/javascripts/api/viz_v1.js'></script><div class='tableauPlaceholder' style='width: 1284px; height: 513px;'><object class='tableauViz' width='1284' height='513' style='display:none;'><param name='host_url' value='https%3A%2F%2F10az.online.tableau.com%2F' /> <param name='site_root' value='&#47;t&#47;sjsubikerental' /><param name='name' value='CustomerYear&#47;Sheet1' /><param name='tabs' value='no' /><param name='toolbar' value='yes' /><param name='showShareOptions' value='true' /></object></div>";
+                print "<script type='text/javascript' src='https://10az.online.tableau.com/javascripts/api/viz_v1.js'></script><div class='tableauPlaceholder' style='width: 1284px; height: 513px;'><object class='tableauViz' width='1284' height='513' style='display:none;'><param name='host_url' value='https%3A%2F%2F10az.online.tableau.com%2F' /> <param name='site_root' value='&#47;t&#47;sjsubikerental' /><param name='name' value='revenueBikeTypes&#47;Sheet1' /><param name='tabs' value='no' /><param name='toolbar' value='yes' /><param name='showShareOptions' value='true' /></object></div>";
+                
             }
           
         }
