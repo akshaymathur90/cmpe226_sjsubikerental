@@ -16,7 +16,7 @@
     	include_once(__DIR__ . "/dbconnect.php");
     	$con = connectDB();
 
-    	$loginCredentialQuery = "SELECT name from person where name=:username and password=:password";
+    	$loginCredentialQuery = "SELECT personid from person where name=:username and password=:password";
         $loginPS = $con->prepare($loginCredentialQuery);
         $loginPS->bindParam(':username', $userEmail);
         $loginPS->bindParam(':password', $userPassword);
@@ -25,9 +25,13 @@
 
         if(count($rows) > 0){
                 print "<p>Valid User credentials</p>\n";
-                echo '<script type="text/javascript">
-           window.location = "http://www.google.com/"
-      </script>';
+                session_start();
+                foreach ($rows as $data) {
+                    $_SESSION["userid"] = $data["personid"];
+                    print "<p> hello " . $_SESSION["userid"] ."</p>\n";
+
+                }
+               echo '<script type="text/javascript"> window.location = "./location.php" </script>';
             }
             else{
             	print "<p>In-Valid User credentials</p>\n";
