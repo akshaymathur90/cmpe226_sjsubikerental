@@ -1,4 +1,5 @@
 
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -74,7 +75,7 @@
 
 
 
-	<section style="height: 10px;" id="services" class="section section-padded">
+	<section style="height: 130px;" id="services" class="section section-padded">
 
 		<div  class="container">
 		<span>&nbsp;</span>
@@ -89,57 +90,39 @@
 		<a href="#" class="close-link"><i class="arrow_up"></i></a>
 	</div>
 
-	<div style="margin-top:20px" class="container">
+	<div style="margin-top:50px" class="container">
 		<?php
-		include('dbconnect.php');
+		// URL: bikerental.com/booking.php?bikeid=12
+		include("dbconnect.php");
 
+		session_start();
 
-		$id = $_GET['id'];
-		echo "<h3 style='text-align:center;text-transform:capitalize;'>$id</h3>";
-		// pull info from db based on $id
-		#$sql = mysql_query('SELECT LocationID from location WHERE Branch_name ="'.$id.'"');
-		$sql = "SELECT LocationID from location WHERE Branch_name ='".$id."'";
+		// user is not logged in
+		if(!$_SESSION["userid"]) {
+			header("Location: ./index.html");
+			die();
+		}
+
+		$userId = $_SESSION["userid"];
+		$bikeId = $_GET["bikeid"];
+
+		// no bike id was given
+		if($bikeId == "") {
+			header("Location: ./location.php");
+			die();
+		}
+
+		$discount = 0;
+		// create a booking
+		$sql = "INSERT INTO booking(start_time, discount, PersonID, BikeID) VALUES (now(), $discount, $userId, $bikeId);";
 		#echo $sql;
-		$result = $conn->query($sql);
-
-		#$location_id = mysqli_fetch_assoc($result);
-		while($row = mysqli_fetch_assoc($result)) {
-			$location_id = $row["LocationID"];
-		    }
-		#echo $location_id;
-
-
-
-		$sql = "SELECT BikeID, Model, Bike_Type from bike WHERE LocationID ='".$location_id."'";
-		$result = $conn->query($sql);
-		echo "<br><br><table style='width:70%;margin:auto;'>";
-		echo "<tr style='font-size:18px;'><th>Model</th><th>Type</th><th>Price</th><th></th></tr>";
-		while($row = mysqli_fetch_assoc($result)) {
-			$model = $row["Model"];
-			$bike_type = $row["Bike_Type"];
-			#echo "<tr><td>".$model."</td><td>".$bike_type."</td></tr>";
-			$sql_temp1 = "SELECT Bike_model from bike_model WHERE Bike_Model_ID ='".$model."'";
-			$sql_temp2 = "SELECT Bike_Type,hourly_rate from bike_type WHERE Bike_Type_ID ='".$bike_type."'";
-			$result_temp1 = $conn->query($sql_temp1);
-			$result_temp2 = $conn->query($sql_temp2);
-			while($row_temp1 = mysqli_fetch_assoc($result_temp1))
-			{
-				echo "<tr style='font-size:18px;height:50px;'><td>".$row_temp1["Bike_model"]."</td>";
-			}
-			while($row_temp2 = mysqli_fetch_assoc($result_temp2))
-			{
-				$bikeId = $row["BikeID"];
-				echo "<td>".$row_temp2["Bike_Type"]."</td><td>".$row_temp2["hourly_rate"]."</td><td><a style='width:100%;height:100%;display:block;color:white;background-color:#0d0d0d;text-align:center;' href='./booking.php?bikeid=$bikeId'>Book</a></td></tr>";
-			}			
-		    }
-		echo "</table><br><br>";
-
-		echo "<a style='width:20%;display:block;height:50px;background-color:#0d0d0d;font-size:18px;margin:auto;text-align:center;color:white;padding-top:10px;' href='./mybooking.php'>Show All My Bookings</a>";
-
-		#echo $sql;
+		if($conn->query($sql) == TRUE) {
+			echo "<h3 style='text-align:center;text-transform:capitalize;'>Booking was successful</h3>";
+		} else {
+			echo "<h3 style='text-align:center;text-transform:capitalize;'>Booking Failed</h3>";
+		}
 
 		?>
-
 	</div>
 
 	<!-- Scripts -->
