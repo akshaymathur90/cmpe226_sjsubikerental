@@ -1,0 +1,87 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Bootstrap Example</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <style>
+  #rcorners2 {
+    border-radius: 25px;
+    border: 2px solid #73AD21;
+    padding: 20px; 
+    #width: 300px;
+    height: 350px;    
+}
+.black-background {background-color:#000000;}
+.white {color:#ffffff;}
+</style>
+</head>
+
+<body class="container" style="background-color:#f4d442">
+<div class="jumbotron text-center black-background white">
+  <h1>Bookings</h1>
+</div>
+<div class="row">
+	<div class="col-md-6">
+		<form action="query9.php" method="POST">
+ 			<input type="submit" value="Check number of bikes rented across Bike Models for all years" style="height:100px;width:580px" />
+ 		</form>
+ 	</div>
+ 	<div class="col-md-6">
+ 		<form action="query2.php" method="POST">
+ 			<input type="submit" value="Check number of Bookings across Bike Types for all years" style="height:100px;width:580px" />
+ 		</form>
+ 	</div>
+ 
+</div>
+<br>
+<div class="row">
+	<div class="col-md-6">
+ 		<form action="query4.php" method="POST">
+ 			<input type="submit" value="Check number of bikes rented for all quarters for recent year" style="height:100px;width:580px" />
+ 		</form>
+ 	</div>
+ 	<div class="col-md-6">
+ 		<form action="query5.php" method="POST">
+ 			<input type="submit" value="Check number of bikes rented for all months for recent year" style="height:100px;width:580px" />
+ 		</form>
+ 	</div>
+</div>
+<br>
+<div class="row">
+   <div class="col-md-6">
+ 		<form action="query3.php" method="POST">
+ 			<input type="submit" value="Check number of bikes rented for all years" style="height:100px;width:580px" />
+ 		</form>
+ 	</div>
+	<div class="col-md-6">
+ 		<form action="query6.php" method="POST">
+ 			<input type="submit" value="Check number of bikes rented for each location for all years" style="height:100px;width:580px" />
+ 		</form>
+ 	</div>
+ 	
+</div>
+<br>
+<div class="row">
+<div class="col-md-6">
+ 		<form action="query7.php" method="POST">
+ 			<input type="submit" value="Check number of bikes rented for each location for all years per bike type" style="height:100px;width:580px" />
+ 		</form>
+ 	</div>
+	<div class="col-md-6">
+ 		<form action="query8.php" method="POST">
+ 			<input type="submit" value="Check number of bikes rented for each location for all years per bike type and bike model" style="height:100px;width:580px" />
+ 		</form>
+ 	</div>
+ 	
+</div>
+
+​
+</body>
+</html>
+​
+
