@@ -62,10 +62,7 @@
 			<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 				<ul class="nav navbar-nav navbar-right main-nav">
 					<li><a style="color:black" href="#intro">Intro</a></li>
-					
-					<li><a style="color:black" href="#team">Team</a></li>
-					<li><a style="color:black" href="#pricing">Pricing</a></li>
-					<li><a style="color:black" href="#services" class="btn btn-blue">Sign Up</a></li>
+					<li><a style="color:black" href="analytics.html">Analytics</a></li>
 				</ul>
 			</div>
 			<!-- /.navbar-collapse -->
@@ -93,7 +90,7 @@
 	<div style="margin-top:50px" class="container">
 		<?php
 		// URL: bikerental.com/booking.php?bikeid=12
-		include("dbconnect.php");
+		include("dbconnect1.php");
 
 		session_start();
 

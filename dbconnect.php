@@ -1,12 +1,11 @@
+
 <?php
-$servername = "localhost";
-$username = "root";
-$password = "root123";
-$dbname = "datawrench";
-// Create connection
-$conn = new mysqli($servername, $username, $password, $dbname);
-// Check connection
-if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
-} 
+function connectDB(){
+	$con = new PDO("mysql:host=localhost:3307;dbname=datawrench",
+                           "root1", "root123");
+    $con->setAttribute(PDO::ATTR_ERRMODE,
+                               PDO::ERRMODE_EXCEPTION);
+    return $con;
+}
+
 ?>
